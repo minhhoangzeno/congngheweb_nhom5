@@ -8,6 +8,15 @@ export declare class AttendanceUserController {
     findAttendanceByUser(req: any): Promise<(import("./schemas/attendance-user.schemas").AttendanceUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[]>;
+    statisticAttendanceByUser(req: any): Promise<{
+        attendanceUserNotPaids: number;
+        attendanceUserPaids: number;
+    }>;
+    statisticAttendanceByAdmim(attendanceId: any): Promise<{
+        attendanceUserNotPaids: number;
+        attendanceUserPaids: number;
+        attendanceUserTotal: number;
+    }>;
     changeAttendanceUserStatusByAdmin(body: any): Promise<import("./schemas/attendance-user.schemas").AttendanceUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

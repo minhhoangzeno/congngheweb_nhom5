@@ -5,6 +5,22 @@ export declare class PaymentUserController {
     findPaymentByUser(req: any): Promise<(import("./schemas/payment-user.schemas").PaymentUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[]>;
+    statisticPaymentByUser(req: any): Promise<{
+        paymentUserNotPaids: number;
+        paymentUserPaids: number;
+    }>;
+    statisticPaymentByAdmin(paymentId: any): Promise<{
+        quality: {
+            paymentUserNotPaids: number;
+            paymentUserPaids: number;
+            paymentUserTotal: number;
+        };
+        amount: {
+            paymentUserNotPaids: number;
+            paymentUserPaids: number;
+            paymentUserTotal: number;
+        };
+    }>;
     paymentUserStatusByUser(paymentUserId: any): Promise<import("./schemas/payment-user.schemas").PaymentUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

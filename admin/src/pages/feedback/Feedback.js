@@ -25,6 +25,10 @@ export default () => {
         addToast("Delete Success", { appearance: 'success', autoDismiss: 1000 })
     }
 
+
+
+ 
+
     return (
         <>
             <Container>
@@ -38,6 +42,7 @@ export default () => {
                                         <th className="border-bottom">Nội dung phản hồi</th>
                                         <th className="border-bottom">Họ tên</th>
                                         <th className="border-bottom">Email</th>
+                                        <th className="border-bottom">Số điện thoại</th>
                                         <th className="border-bottom">Ngày</th>
                                         <th className="border-bottom">Cài đặt</th>
                                     </tr>
@@ -92,6 +97,7 @@ function TableItem({ index, feedback, deleteFeedback }) {
                 <td>{feedback.content}</td>
                 <td>{feedback.createdBy.fullName}</td>
                 <td>{feedback.createdBy.email}</td>
+                <td>{feedback.createdBy?.phoneNumber}</td>
                 <td>{moment(feedback?.createdAt).format("HH:mm DD-MM-YYYY")}</td>
                 <td>
                     <Dropdown as={ButtonGroup}>

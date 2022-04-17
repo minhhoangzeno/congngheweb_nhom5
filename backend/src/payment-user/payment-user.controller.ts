@@ -14,6 +14,19 @@ export class PaymentUserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('statistic')
+  async statisticPaymentByUser(@Request() req) {
+    return this.paymentUserService.statisticPaymentByUser(req.user._doc._id)
+  }
+
+
+  @UseGuards(JwtAuthGuard)
+  @Get('statistic-admin/:paymentId')
+  async statisticPaymentByAdmin(@Param('paymentId') paymentId) {
+    return this.paymentUserService.statisticPaymentByAdmin(paymentId)
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('payment/:paymentUserId')
   async paymentUserStatusByUser(@Param('paymentUserId') paymentUserId) {
     return this.paymentUserService.paymentUserStatus(paymentUserId)

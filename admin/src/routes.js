@@ -51,6 +51,8 @@ export const Routes = {
     VideoEdit: { path: "/video/edit" },
 
     Feedback: { path: "/feedback" },
+    FeedbackUser: { path: "/feedback-user" },
+
     User: { path: "/user" },
 
     Category: { path: "/category" },

@@ -6,6 +6,15 @@ export declare class AttendanceUserService {
     findAttendanceByUser(user: any): Promise<(AttendanceUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[]>;
+    statisticAttendanceByUser(user: any): Promise<{
+        attendanceUserNotPaids: number;
+        attendanceUserPaids: number;
+    }>;
+    statisticAttendanceByAdmin(attendanceId: any): Promise<{
+        attendanceUserNotPaids: number;
+        attendanceUserPaids: number;
+        attendanceUserTotal: number;
+    }>;
     attendanceUserStatus(attendanceUserDto: any, user: any): Promise<AttendanceUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

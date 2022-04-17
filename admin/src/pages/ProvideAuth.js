@@ -55,6 +55,7 @@ import PaymentDetail from "./payment/PaymentDetail";
 import AttendanceUser from "./attendance/AttendanceUser";
 import PaymentUser from "./payment/PaymentUser";
 import PaymentInfor from "./payment/PaymentInfor";
+import FeedbackUser from "./feedback/FeedbackUser";
 
 
 const RouteWithSidebar = ({ component: Component, ...rest }) => {
@@ -144,6 +145,7 @@ export default function ProvideAuth() {
 
             <RouteWithSidebar exact path={Routes.User.path} component={User} />
             <RouteWithSidebar exact path={Routes.Feedback.path} component={Feedback} />
+            <RouteWithSidebar exact path={Routes.FeedbackUser.path} component={FeedbackUser} />
 
             <RouteWithSidebar exact path={Routes.Attendance.path} component={Attendance} />
             <RouteWithSidebar exact path={Routes.AttendanceAdd.path} component={AttendanceAdd} />

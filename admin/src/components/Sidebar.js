@@ -1,4 +1,5 @@
 
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import { faStickyNote } from "@fortawesome/free-regular-svg-icons";
 import { faVideo } from "@fortawesome/free-solid-svg-icons";
 import { faMoneyBill } from "@fortawesome/free-solid-svg-icons";
@@ -92,7 +93,9 @@ export default (props = {}) => {
               <NavItem title="Video" icon={faVideo} link={Routes.Video.path} />
 
               {(user.roles === "superadmin") && <NavItem title="Role User" icon={faUserAstronaut} link={Routes.User.path} />}
-              {<NavItem title="Feedback" icon={faUserAstronaut} link={Routes.Feedback.path} />}
+
+              {(user.roles === "admin" || user.roles === "superadmin") && <NavItem title="Phản hồi người dùng" icon={faFacebookMessenger} link={Routes.Feedback.path} />}
+              {(user.roles === "user") && <NavItem title="Phản hồi" icon={faFacebookMessenger} link={Routes.FeedbackUser.path} />}
 
               <Dropdown.Divider className="my-3 border-indigo" />
 

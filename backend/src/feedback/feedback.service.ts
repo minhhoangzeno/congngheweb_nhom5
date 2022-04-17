@@ -12,7 +12,7 @@ export class FeedbackService {
     ) { }
 
     async findAll() {
-        return this.feedbackModel.find().populate("createdBy","fullName email","User");
+        return this.feedbackModel.find().populate("createdBy","fullName email phoneNumber","User");
     }
 
     async create(content, userId) {

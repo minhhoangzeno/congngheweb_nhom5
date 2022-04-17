@@ -25,7 +25,7 @@ let FeedbackService = class FeedbackService {
         this.userModel = userModel;
     }
     async findAll() {
-        return this.feedbackModel.find().populate("createdBy", "fullName email", "User");
+        return this.feedbackModel.find().populate("createdBy", "fullName email phoneNumber", "User");
     }
     async create(content, userId) {
         let user = await this.userModel.findById(userId);

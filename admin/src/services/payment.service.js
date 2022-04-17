@@ -18,6 +18,19 @@ export const paymentUserStatus = async (dto) => {
 };
 
 
+export const paymentUserStatisticByAdmin = async (dto) => {
+    let response = await privateGetApi(`/payment-user/statistic-admin/${dto}`)
+    return response
+};
+
+
+export const paymentUserStatistic = async () => {
+    let response = await privateGetApi(`/payment-user/statistic`)
+    return response
+};
+
+
+
 export const addPayment = async (data) => {
     let response = await privatePostApi('/payment/create', data)
     return response

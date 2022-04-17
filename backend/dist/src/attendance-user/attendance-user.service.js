@@ -24,6 +24,24 @@ let AttendanceUserService = class AttendanceUserService {
     async findAttendanceByUser(user) {
         return this.attendanceUserModel.find({ user }).populate("attendance", "title startDate endDate", "Attendance");
     }
+    async statisticAttendanceByUser(user) {
+        let attendanceUserNotPaids = await this.attendanceUserModel.find({ user, status: 'Đã điểm danh' });
+        let attendanceUserPaids = await this.attendanceUserModel.find({ user });
+        return {
+            attendanceUserNotPaids: attendanceUserNotPaids.length,
+            attendanceUserPaids: attendanceUserPaids.length
+        };
+    }
+    async statisticAttendanceByAdmin(attendanceId) {
+        let attendanceUserNotPaids = await this.attendanceUserModel.find({ attendance: attendanceId, status: 'Chưa điểm danh' });
+        let attendanceUserPaids = await this.attendanceUserModel.find({ attendance: attendanceId, status: 'Đã điểm danh' });
+        let attendanceUserTotal = await this.attendanceUserModel.find({ attendance: attendanceId });
+        return {
+            attendanceUserNotPaids: attendanceUserNotPaids.length,
+            attendanceUserPaids: attendanceUserPaids.length,
+            attendanceUserTotal: attendanceUserTotal.length
+        };
+    }
     async attendanceUserStatus(attendanceUserDto, user) {
         var _a;
         let attendanceUser = await this.attendanceUserModel.findOne({ attendance: attendanceUserDto.attendance, user: user }).populate("attendance", "code", "Attendance");

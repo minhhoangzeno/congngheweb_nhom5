@@ -37,6 +37,19 @@ export const getAttendanceUser = async () => {
 };
 
 
+export const attendanceUserStatistic = async () => {
+    let response = await privateGetApi(`/attendance-user/statistic`)
+    return response
+};
+
+
+
+export const attendanceUserStatisticByAdmin = async (dto) => {
+    let response = await privateGetApi(`/attendance-user/statistic-admin/${dto}`)
+    return response
+};
+
+
 export const deleteAttendance = async (data) => {
     let response = await privateDeleteApi(`/attendance/delete/${data}`)
     return response

@@ -23,6 +23,12 @@ let PaymentUserController = class PaymentUserController {
     async findPaymentByUser(req) {
         return this.paymentUserService.findPaymentByUser(req.user._doc._id);
     }
+    async statisticPaymentByUser(req) {
+        return this.paymentUserService.statisticPaymentByUser(req.user._doc._id);
+    }
+    async statisticPaymentByAdmin(paymentId) {
+        return this.paymentUserService.statisticPaymentByAdmin(paymentId);
+    }
     async paymentUserStatusByUser(paymentUserId) {
         return this.paymentUserService.paymentUserStatus(paymentUserId);
     }
@@ -41,6 +47,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PaymentUserController.prototype, "findPaymentByUser", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('statistic'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PaymentUserController.prototype, "statisticPaymentByUser", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('statistic-admin/:paymentId'),
+    __param(0, (0, common_1.Param)('paymentId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PaymentUserController.prototype, "statisticPaymentByAdmin", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('payment/:paymentUserId'),

@@ -6,6 +6,22 @@ export declare class PaymentUserService {
     findPaymentByUser(user: any): Promise<(PaymentUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     })[]>;
+    statisticPaymentByUser(user: any): Promise<{
+        paymentUserNotPaids: number;
+        paymentUserPaids: number;
+    }>;
+    statisticPaymentByAdmin(paymentId: any): Promise<{
+        quality: {
+            paymentUserNotPaids: number;
+            paymentUserPaids: number;
+            paymentUserTotal: number;
+        };
+        amount: {
+            paymentUserNotPaids: number;
+            paymentUserPaids: number;
+            paymentUserTotal: number;
+        };
+    }>;
     paymentUserStatusByAdmin(paymentUserDto: any): Promise<PaymentUser & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;

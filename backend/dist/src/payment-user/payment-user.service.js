@@ -24,6 +24,43 @@ let PaymentUserService = class PaymentUserService {
     async findPaymentByUser(user) {
         return this.paymentUserModel.find({ user }).populate("payment", "title fee", "Payment");
     }
+    async statisticPaymentByUser(user) {
+        let paymentUserNotPaids = await this.paymentUserModel.find({ user, status: 'Đã nộp' });
+        let paymentUserPaids = await this.paymentUserModel.find({ user });
+        return {
+            paymentUserNotPaids: paymentUserNotPaids.length,
+            paymentUserPaids: paymentUserPaids.length
+        };
+    }
+    async statisticPaymentByAdmin(paymentId) {
+        let totalMoneyNotPaids = 0;
+        let totalMoneyPaids = 0;
+        let totalMoneyTotal = 0;
+        let paymentUserNotPaids = await this.paymentUserModel.find({ payment: paymentId, status: 'Chưa nộp' }).populate('payment', 'fee', 'Payment');
+        let paymentUserPaids = await this.paymentUserModel.find({ payment: paymentId, status: 'Đã nộp' }).populate('payment', 'fee', 'Payment');
+        let paymentUserTotalPaids = await this.paymentUserModel.find({ payment: paymentId }).populate('payment', 'fee', 'Payment');
+        if (paymentUserNotPaids.length > 0) {
+            paymentUserNotPaids.forEach(item => { var _a; return totalMoneyNotPaids += Number((_a = item === null || item === void 0 ? void 0 : item.payment) === null || _a === void 0 ? void 0 : _a.fee); });
+        }
+        if (paymentUserPaids.length > 0) {
+            paymentUserPaids.forEach(item => { var _a; return totalMoneyPaids += Number((_a = item === null || item === void 0 ? void 0 : item.payment) === null || _a === void 0 ? void 0 : _a.fee); });
+        }
+        if (paymentUserTotalPaids.length > 0) {
+            paymentUserTotalPaids.forEach(item => { var _a; return totalMoneyTotal += Number((_a = item === null || item === void 0 ? void 0 : item.payment) === null || _a === void 0 ? void 0 : _a.fee); });
+        }
+        return {
+            quality: {
+                paymentUserNotPaids: paymentUserNotPaids.length,
+                paymentUserPaids: paymentUserPaids.length,
+                paymentUserTotal: paymentUserTotalPaids.length
+            },
+            amount: {
+                paymentUserNotPaids: totalMoneyNotPaids,
+                paymentUserPaids: totalMoneyPaids,
+                paymentUserTotal: totalMoneyTotal
+            }
+        };
+    }
     async paymentUserStatusByAdmin(paymentUserDto) {
         let paymentUser = await this.paymentUserModel.findOne({ payment: paymentUserDto.payment, user: paymentUserDto.user });
         if (paymentUser) {
