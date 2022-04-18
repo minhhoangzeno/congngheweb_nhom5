@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogSchema = exports.Blog = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose = require("mongoose");
+const user_schemas_1 = require("../../user/schemas/user.schemas");
 let Blog = class Blog {
 };
 __decorate([
@@ -35,8 +36,8 @@ __decorate([
     __metadata("design:type", String)
 ], Blog.prototype, "photoURL", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, ref: 'User' }),
+    __metadata("design:type", user_schemas_1.User)
 ], Blog.prototype, "createdBy", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),

@@ -25,7 +25,7 @@ let VideoService = class VideoService {
         return this.videoModel.find({ '_id': { $ne: videoId } });
     }
     async findAll(skipNumber) {
-        return this.videoModel.find({}).populate("category", "title", "Category").sort({ createdAt: -1 }).skip(skipNumber).limit(6).exec().then(data => {
+        return this.videoModel.find({}).populate("category", "title", "Category").populate("createdBy", "fullName", "User").sort({ createdAt: -1 }).skip(skipNumber).limit(6).exec().then(data => {
             return this.videoModel.countDocuments().exec().then(count => {
                 return {
                     totalPage: count,

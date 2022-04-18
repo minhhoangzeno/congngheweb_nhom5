@@ -75,6 +75,18 @@ export default () => {
 }
 
 function VideoItem({ video, deleteVideo, routerDetailVideo, routerEditVideo }) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    let checkUser = () => {
+        if (user?.roles === "superadmin" || user?.roles === "admin") {
+            return true
+        } else {
+            if (user?._id === video?.createdBy?._id) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
     return (
         <Col>
             <Card style={{ width: '18rem' }} className="mt-4" >
@@ -86,8 +98,10 @@ function VideoItem({ video, deleteVideo, routerDetailVideo, routerEditVideo }) {
                     <Card.Subtitle className="d-flex justify-content-between mt-2" style={{ alignItems: 'center', flexDirection: 'column' }} >
                         <div className="d-flex justify-content-between mt-2" style={{ width: '100%' }} >
                             <FontAwesomeIcon onClick={() => routerDetailVideo(video)} icon={faEye} style={{ cursor: 'pointer' }} />
-                            <FontAwesomeIcon onClick={() => routerEditVideo(video)} icon={faEdit} style={{ cursor: 'pointer' }} />
-                            <FontAwesomeIcon onClick={() => deleteVideo(video._id)} icon={faTrashAlt} style={{ cursor: 'pointer' }} />
+                            {checkUser() && <>
+                                <FontAwesomeIcon onClick={() => routerEditVideo(video)} icon={faEdit} style={{ cursor: 'pointer' }} />
+                                <FontAwesomeIcon onClick={() => deleteVideo(video._id)} icon={faTrashAlt} style={{ cursor: 'pointer' }} />
+                            </>}
                         </div>
                         <div
                             className="d-flex mt-4" style={{ width: '100%', justifyContent: 'flex-start' }}
@@ -95,7 +109,7 @@ function VideoItem({ video, deleteVideo, routerDetailVideo, routerEditVideo }) {
                     </Card.Subtitle>
                 </Card.Body>
                 <Card.Footer>
-                    <small className="text-muted">{moment(video?.createdAt).format("HH:mm DD/MM/YYYY")}</small> - <small className="text-muted">{video?.createdBy}</small>
+                    <small className="text-muted">{moment(video?.createdAt).format("HH:mm DD/MM/YYYY")}</small> - <small className="text-muted">{video?.createdBy?.fullName}</small>
                 </Card.Footer>
             </Card>
         </Col>

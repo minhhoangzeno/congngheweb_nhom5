@@ -37,9 +37,9 @@ let AttendanceUserService = class AttendanceUserService {
         let attendanceUserPaids = await this.attendanceUserModel.find({ attendance: attendanceId, status: 'Đã điểm danh' });
         let attendanceUserTotal = await this.attendanceUserModel.find({ attendance: attendanceId });
         return {
-            attendanceUserNotPaids: attendanceUserNotPaids.length,
-            attendanceUserPaids: attendanceUserPaids.length,
-            attendanceUserTotal: attendanceUserTotal.length
+            attendanceUserNotPaids: attendanceUserNotPaids ? attendanceUserNotPaids.length : 0,
+            attendanceUserPaids: attendanceUserPaids ? attendanceUserPaids.length : 0,
+            attendanceUserTotal: attendanceUserTotal ? attendanceUserTotal.length : 0
         };
     }
     async attendanceUserStatus(attendanceUserDto, user) {

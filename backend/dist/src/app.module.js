@@ -27,7 +27,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [user_module_1.UserModule,
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost/congngheweb'),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost/minhhoang'),
             auth_module_1.AuthModule,
             blog_module_1.BlogModule,
             comment_module_1.CommentModule,

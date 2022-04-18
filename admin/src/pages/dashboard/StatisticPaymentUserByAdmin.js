@@ -67,7 +67,7 @@ export default () => {
           <tr>
             <th scope="col">Đã nộp</th>
             <th scope="col">Chưa nộp</th>
-            <th scope="col">Tổng số người đã nộp</th>
+            <th scope="col">Tổng</th>
             <th scope="col">Đã thu</th>
             <th scope="col">Chưa thu</th>
             <th scope="col">Tổng số học phí</th>
